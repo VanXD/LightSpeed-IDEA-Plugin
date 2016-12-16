@@ -1,0 +1,1 @@
+# LightSpeed-IDEA-Plugin
