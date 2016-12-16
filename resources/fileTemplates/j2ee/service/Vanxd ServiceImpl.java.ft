@@ -1,0 +1,6 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
+#parse("File Header.java")
+@Service
+@Transactional
+public class  ${NAME}ServiceImpl extends BaseServiceImpl<${NAME}, ${NAME}Mapper> implements ${NAME}Service {
+}
