@@ -1,8 +1,8 @@
 <idea-plugin version="2">
   <id>com.your.company.unique.plugin.id</id>
-  <name>Plugin display name here</name>
+  <name>LightSpeed</name>
   <version>1.0</version>
-  <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+  <vendor email="373437500@qq.com" url="http://vanxd.github.com">我的GitHub</vendor>
 
   <description><![CDATA[
       Enter short description for your plugin here.<br>
