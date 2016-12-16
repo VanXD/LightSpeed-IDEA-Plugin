@@ -31,7 +31,7 @@
 
   <actions>
     <!-- Add your actions here -->
-    <action id="com.vanxd.action.GenerateServicesAction" class="com.vanxd.action.GenerateServicesAction" text="Generate Service" description="com.vanxd.action.GenerateServicesAction">
+    <action id="com.vanxd.action.GenerateThreePieceSuitAction" class="com.vanxd.action.GenerateThreePieceSuitAction" text="Generate Service" description="com.vanxd.action.GenerateThreePieceSuitAction">
       <add-to-group group-id="GenerateGroup" anchor="first"/>
     </action>
   </actions>

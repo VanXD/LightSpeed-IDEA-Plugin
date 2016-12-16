@@ -1,6 +1,12 @@
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
-#parse("File Header.java")
 @Service
 @Transactional
 public class  ${NAME}ServiceImpl extends BaseServiceImpl<${NAME}, ${NAME}Mapper> implements ${NAME}Service {
+    @Autowired
+    private ${NAME}Mapper ${CAMEL_NAME}Mapper;
+
+    @Override
+    public ${NAME}Mapper getMapper() {
+        return ${CAMEL_NAME}Mapper;
+    }
 }

@@ -1,0 +1,13 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
+@Controller
+@RequestMapping("")
+@RequiresPermissions("")
+public class ${NAME}Controller extends BaseController<${NAME}, ${NAME}Service>{
+    @Autowired
+    private ${NAME}Service ${CAMEL_NAME}ServiceImpl;
+
+    @Override
+    protected ${NAME}Service getService() {
+        return ${CAMEL_NAME}ServiceImpl;
+    }
+}
