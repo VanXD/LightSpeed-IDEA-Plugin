@@ -1,6 +1,5 @@
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 @Service
-@Transactional
 public class  ${NAME}ServiceImpl extends BaseServiceImpl<${NAME}, ${NAME}Mapper> implements ${NAME}Service {
     @Autowired
     private ${NAME}Mapper ${CAMEL_NAME}Mapper;
