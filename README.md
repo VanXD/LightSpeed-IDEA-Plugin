@@ -1,6 +1,9 @@
 # LightSpeed-IDEA-Plugin
 可以直接生成BO的Service接口、ServiceImpl、Controller
 
+#   打JAR包
+1.右键工程
+2.底部有一个"Prepare Plugin Module...."
 
 #   使用
 1.  BO中按alt+insert，选择Generate Suit
