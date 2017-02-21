@@ -1,4 +1,3 @@
-#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 package com.vanxd.admin.service.todo.impl;
 @Service
 public class  ${NAME}ServiceImpl extends BaseServiceImpl<${NAME}, ${NAME}Mapper> implements ${NAME}Service {
