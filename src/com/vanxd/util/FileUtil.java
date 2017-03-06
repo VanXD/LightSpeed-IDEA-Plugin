@@ -4,13 +4,20 @@ import com.intellij.ide.fileTemplates.FileTemplate;
 import com.intellij.ide.fileTemplates.FileTemplateManager;
 import com.intellij.ide.fileTemplates.FileTemplateUtil;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.sun.istack.internal.NotNull;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
+import static com.vanxd.generator.PackageGenerator.CONTROLLER_PACKAGE_GENERATOR;
+import static com.vanxd.generator.PackageGenerator.DAO_PACKAGE_GENERATOR;
+import static com.vanxd.generator.PackageGenerator.SERVICE_PACKAGE_GENERATOR;
 
 /**
  * @author wyd on 2016/12/16.
@@ -18,43 +25,58 @@ import java.util.Properties;
 public class FileUtil {
 
     /**
-     * 创建指定{templateName}的文件
-     * @param templateName      模板名
-     * @param project           项目对象
-     * @param properties        属性对象，为模板填值用
-     * @param dir               目录
-     * @return
-     */
-    public static PsiElement createFromTemplate(@NotNull String templateName, @NotNull Project project, @NotNull Properties properties, @NotNull PsiDirectory dir) {
-        try {
-            FileTemplate template = FileTemplateManager.getInstance(project).getJ2eeTemplate(templateName);
-            return FileTemplateUtil.createFromTemplate(template, "", properties, dir);
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-        return null;
-    }
-
-    /**
      * 根据{templateNames}批量创建文件
      * 需要注意，这里多个模板用的值都是{properties}这一个对象里的。
      * @param templateNames     模板名
      * @param project           项目对象
      * @param properties        属性对象，为模板填值用
-     * @param dir               目录
+     * @param actionPsiFile     执行操作的文件
      * @return
      */
-    public static List<PsiElement> createFromTemplate(@NotNull String[] templateNames, @NotNull Project project, @NotNull Properties properties, @NotNull PsiDirectory dir) {
+    public static List<PsiElement> createFromTemplate(@NotNull String[] templateNames, @NotNull Project project, @NotNull Properties properties, @NotNull PsiFile actionPsiFile) {
+        FileTemplate template = null;
+        PsiElement psiElement = null;
+        PsiDirectory layerDirectory = null;
         List<PsiElement> psiElementList = new ArrayList<>();
         try {
             for ( String templateName : templateNames ) {
-                FileTemplate template = FileTemplateManager.getInstance(project).getJ2eeTemplate(templateName);
-                PsiElement psiElement = FileTemplateUtil.createFromTemplate(template, "", properties, dir);
+                layerDirectory = getTemplateDirectory(templateName, project, actionPsiFile);
+                template = FileTemplateManager.getInstance(project).getJ2eeTemplate(templateName);
+                psiElement = FileTemplateUtil.createFromTemplate(template, "", properties, layerDirectory);
                 psiElementList.add(psiElement);
             }
         } catch (Exception exception) {
             exception.printStackTrace();
         }
         return psiElementList;
+    }
+
+
+    /**
+     * 获得template的文件夹，
+     * 匹配MVC各层模板的包名，将文件直接放入对应的包
+     * @param templateName      模板名称
+     * @param project           项目
+     * @param actionPsiFile     如果没有在默认关键字中获得相应的路径，则将文件生成位于和执行命令的文件同文件夹下
+     * @return
+     */
+    private static PsiDirectory getTemplateDirectory(String templateName, Project project, PsiFile actionPsiFile) {
+        JavaPsiFacade javaPsiFacade = JavaPsiFacade.getInstance(project);
+        if (templateName.lastIndexOf("Controller") > -1) {
+            String packageName = CONTROLLER_PACKAGE_GENERATOR.getPackageName();
+            if(StringUtils.isNotEmpty(packageName)) {
+                return javaPsiFacade.findPackage(packageName).getDirectories()[0];
+            }
+        }
+        if (templateName.lastIndexOf("ServiceImpl") > -1) {
+            return javaPsiFacade.findPackage(SERVICE_PACKAGE_GENERATOR.getPackageName() + ".impl").getDirectories()[0];
+        }
+        if (templateName.lastIndexOf("ServiceInterface") > -1) {
+            return javaPsiFacade.findPackage(SERVICE_PACKAGE_GENERATOR.getPackageName()).getDirectories()[0];
+        }
+        if (templateName.lastIndexOf("DaoImpl") > -1) {
+            return javaPsiFacade.findPackage(DAO_PACKAGE_GENERATOR.getPackageName() + ".impl").getDirectories()[0];
+        }
+        return actionPsiFile.getContainingDirectory();
     }
 }

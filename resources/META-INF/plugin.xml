@@ -18,20 +18,24 @@
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
   <idea-version since-build="141.0"/>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-       on how to target different products -->
-  <!-- uncomment to enable plugin in all products
-  <depends>com.intellij.modules.lang</depends>
-  -->
-
   <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
+    <!-- 插件配置面板 -->
+    <applicationConfigurable instance="com.vanxd.setting.LightSpeedConfigurable"/>
+    <!-- 自定义模板 -->
     <fileTemplateGroup implementation="com.vanxd.templats.VanxdFileTemplateGroupDescriptorFactory"/>
+    <!-- 注册配置面板 -->
+    <applicationService serviceInterface="com.vanxd.setting.LightSpeedSetting"
+                        serviceImplementation="com.vanxd.setting.LightSpeedSetting"/>
   </extensions>
 
   <actions>
     <!-- Add your actions here -->
-    <action id="com.vanxd.action.GenerateThreePieceSuitAction" class="com.vanxd.action.GenerateThreePieceSuitAction" text="Generate Suit" description="com.vanxd.action.GenerateThreePieceSuitAction">
+    <!-- mine suit -->
+    <action id="com.vanxd.action.GenerateVanSuitAction" class="com.vanxd.action.GenerateVanSuitAction" text="Generate Suit" description="com.vanxd.action.GenerateVanSuitAction">
+      <add-to-group group-id="GenerateGroup" anchor="first"/>
+    </action>
+    <!-- howjoy suit -->
+    <action id="com.vanxd.action.GenerateHowjoySuitAction" class="com.vanxd.action.GenerateHowjoySuitAction" text="Generate HJ Suit" description="com.vanxd.action.GenerateHowjoySuitAction">
       <add-to-group group-id="GenerateGroup" anchor="first"/>
     </action>
   </actions>
