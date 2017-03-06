@@ -34,10 +34,6 @@
     <action id="com.vanxd.action.GenerateVanSuitAction" class="com.vanxd.action.GenerateVanSuitAction" text="Generate Suit" description="com.vanxd.action.GenerateVanSuitAction">
       <add-to-group group-id="GenerateGroup" anchor="first"/>
     </action>
-    <!-- howjoy suit -->
-    <action id="com.vanxd.action.GenerateHowjoySuitAction" class="com.vanxd.action.GenerateHowjoySuitAction" text="Generate HJ Suit" description="com.vanxd.action.GenerateHowjoySuitAction">
-      <add-to-group group-id="GenerateGroup" anchor="first"/>
-    </action>
   </actions>
 
 </idea-plugin>
