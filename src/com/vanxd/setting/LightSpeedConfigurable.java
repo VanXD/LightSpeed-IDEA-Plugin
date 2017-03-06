@@ -29,7 +29,7 @@ public class LightSpeedConfigurable implements SearchableConfigurable {
             configForm = new LightSpeedConfigForm();
         }
         // 虽然LightSpeedSetting实现了持久化接口，也在XML中注册了，但就是要有这一行。
-        LightSpeedSetting setting = ServiceManager.getService(LightSpeedSetting.class);
+        ServiceManager.getService(LightSpeedSetting.class);
         return configForm.mainPanel;
     }
 

@@ -3,27 +3,27 @@ package com.vanxd.util;
 import com.intellij.ide.fileTemplates.FileTemplate;
 import com.intellij.ide.fileTemplates.FileTemplateManager;
 import com.intellij.ide.fileTemplates.FileTemplateUtil;
+import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.sun.istack.internal.NotNull;
+import com.vanxd.setting.LightSpeedSetting;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import static com.vanxd.generator.PackageGenerator.CONTROLLER_PACKAGE_GENERATOR;
-import static com.vanxd.generator.PackageGenerator.DAO_PACKAGE_GENERATOR;
-import static com.vanxd.generator.PackageGenerator.SERVICE_PACKAGE_GENERATOR;
+import static com.vanxd.generator.PackageGenerator.*;
 
 /**
  * @author wyd on 2016/12/16.
  */
 public class FileUtil {
-
+    private static final LightSpeedSetting lightSpeedSetting = ServiceManager.getService(LightSpeedSetting.class);
     /**
      * 根据{templateNames}批量创建文件
      * 需要注意，这里多个模板用的值都是{properties}这一个对象里的。
@@ -49,6 +49,15 @@ public class FileUtil {
             exception.printStackTrace();
         }
         return psiElementList;
+    }
+
+    public static PsiElement createFromTemplate(@NotNull FileTemplate template, @NotNull Properties properties, @NotNull PsiDirectory directory) {
+        try {
+            return FileTemplateUtil.createFromTemplate(template, "", properties, directory);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
