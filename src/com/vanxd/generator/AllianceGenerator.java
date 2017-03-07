@@ -77,6 +77,9 @@ public class AllianceGenerator {
         String basePath = this.actionProject.getBasePath();
         String path = "";
         for (PackageGenerator packageGenerator : packageGenerators) {
+            if(StringUtils.isEmpty(packageGenerator.getPackageName())) {
+                continue;
+            }
             path = basePath + "/" + PROJECT_PACKAGE_GENERATOR.getBusinessPackageName(actionContainingDirectory)
                     + mavenDir
                     + packageGenerator.getBusinessPackageName(actionContainingDirectory).replace(".", "/");
