@@ -7,6 +7,7 @@ import javax.swing.*;
  */
 public class LightSpeedConfigForm {
     public JPanel mainPanel;
+    public JTextField projectDirectoryName;
     public JTextField controllerPackageName;
     public JTextField daoPackageName;
     public JTextField servicePackageName;

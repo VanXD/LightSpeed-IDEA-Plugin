@@ -7,9 +7,7 @@ import com.vanxd.generator.PackageGenerator;
 import org.jdom.Element;
 import org.jetbrains.annotations.Nullable;
 
-import static com.vanxd.generator.GeneratorHolder.CONTROLLER_PACKAGE_GENERATOR;
-import static com.vanxd.generator.GeneratorHolder.DAO_PACKAGE_GENERATOR;
-import static com.vanxd.generator.GeneratorHolder.SERVICE_PACKAGE_GENERATOR;
+import static com.vanxd.generator.GeneratorHolder.*;
 
 /**
  * @author wyd on 2017/3/4.
@@ -21,6 +19,7 @@ public class LightSpeedSetting implements PersistentStateComponent<Element> {
     @Override
     public Element getState() {
         Element element = new Element("LightSpeedSettings");
+        element.setAttribute(PROJECT_PACKAGE_GENERATOR.getId(), PROJECT_PACKAGE_GENERATOR.getPackageName());
         element.setAttribute(CONTROLLER_PACKAGE_GENERATOR.getId(), CONTROLLER_PACKAGE_GENERATOR.getPackageName());
         element.setAttribute(SERVICE_PACKAGE_GENERATOR.getId(), SERVICE_PACKAGE_GENERATOR.getPackageName());
         element.setAttribute(DAO_PACKAGE_GENERATOR.getId(), DAO_PACKAGE_GENERATOR.getPackageName());
@@ -29,6 +28,7 @@ public class LightSpeedSetting implements PersistentStateComponent<Element> {
 
     @Override
     public void loadState(Element element) {
+        loadState(element, PROJECT_PACKAGE_GENERATOR);
         loadState(element, CONTROLLER_PACKAGE_GENERATOR);
         loadState(element, SERVICE_PACKAGE_GENERATOR);
         loadState(element, DAO_PACKAGE_GENERATOR);

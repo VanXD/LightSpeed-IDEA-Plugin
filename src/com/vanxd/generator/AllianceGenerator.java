@@ -20,14 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import static com.vanxd.generator.GeneratorHolder.CONTROLLER_PACKAGE_GENERATOR;
-import static com.vanxd.generator.GeneratorHolder.DAO_PACKAGE_GENERATOR;
-import static com.vanxd.generator.GeneratorHolder.SERVICE_PACKAGE_GENERATOR;
+import static com.vanxd.generator.GeneratorHolder.*;
 
 /**
  * @author wyd on 2017/3/6.
  */
 public class AllianceGenerator {
+    private static final String mavenDir = "/src/main/java/";
     private static final LightSpeedSetting lightSpeedSetting = ServiceManager.getService(LightSpeedSetting.class);
     private final List<PackageGenerator> packageGenerators = new ArrayList<>();
     PsiFile actionPsiFile;
@@ -78,7 +77,9 @@ public class AllianceGenerator {
         String basePath = this.actionProject.getBasePath();
         String path = "";
         for (PackageGenerator packageGenerator : packageGenerators) {
-            path = basePath + "/src/main/java/" + packageGenerator.getBusinessPackageName(actionContainingDirectory).replace(".", "/");
+            path = basePath + "/" + PROJECT_PACKAGE_GENERATOR.getBusinessPackageName(actionContainingDirectory)
+                    + mavenDir
+                    + packageGenerator.getBusinessPackageName(actionContainingDirectory).replace(".", "/");
             DirectoryUtil.mkdirs(this.actionPsiManager, path);
         }
     }

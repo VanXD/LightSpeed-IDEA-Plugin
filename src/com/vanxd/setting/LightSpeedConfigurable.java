@@ -37,11 +37,13 @@ public class LightSpeedConfigurable implements SearchableConfigurable {
     public boolean isModified() {
         return  !CONTROLLER_PACKAGE_GENERATOR.getPackageName().equals(configForm.controllerPackageName.getText())
             ||  !SERVICE_PACKAGE_GENERATOR.getPackageName().equals(configForm.servicePackageName.getText())
-            ||  !DAO_PACKAGE_GENERATOR.getPackageName().equals(configForm.daoPackageName.getText());
+            ||  !DAO_PACKAGE_GENERATOR.getPackageName().equals(configForm.daoPackageName.getText())
+            ||  !PROJECT_PACKAGE_GENERATOR.getPackageName().equals(configForm.projectDirectoryName.getText());
     }
 
     @Override
     public void apply() throws ConfigurationException {
+        PROJECT_PACKAGE_GENERATOR.setPackageName(configForm.projectDirectoryName.getText());
         CONTROLLER_PACKAGE_GENERATOR.setPackageName(configForm.controllerPackageName.getText());
         SERVICE_PACKAGE_GENERATOR.setPackageName(configForm.servicePackageName.getText());
         DAO_PACKAGE_GENERATOR.setPackageName(configForm.daoPackageName.getText());
@@ -49,6 +51,7 @@ public class LightSpeedConfigurable implements SearchableConfigurable {
 
     @Override
     public void reset() {
+        configForm.projectDirectoryName.setText(PROJECT_PACKAGE_GENERATOR.getPackageName());
         configForm.controllerPackageName.setText(CONTROLLER_PACKAGE_GENERATOR.getPackageName());
         configForm.servicePackageName.setText(SERVICE_PACKAGE_GENERATOR.getPackageName());
         configForm.daoPackageName.setText(DAO_PACKAGE_GENERATOR.getPackageName());
