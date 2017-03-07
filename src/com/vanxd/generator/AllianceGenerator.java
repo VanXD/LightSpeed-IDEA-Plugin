@@ -29,10 +29,10 @@ public class AllianceGenerator {
     private static final String mavenDir = "/src/main/java/";
     private static final LightSpeedSetting lightSpeedSetting = ServiceManager.getService(LightSpeedSetting.class);
     private final List<PackageGenerator> packageGenerators = new ArrayList<>();
-    PsiFile actionPsiFile;
-    PsiManager actionPsiManager;
-    PsiDirectory actionContainingDirectory;
-    Project actionProject;
+    private PsiFile actionPsiFile;
+    private PsiManager actionPsiManager;
+    private PsiDirectory actionContainingDirectory;
+    private Project actionProject;
 
     public AllianceGenerator(@NotNull PsiFile actionPsiFile) {
         this.actionPsiFile = actionPsiFile;
@@ -80,7 +80,9 @@ public class AllianceGenerator {
             if(StringUtils.isEmpty(packageGenerator.getPackageName())) {
                 continue;
             }
-            path = basePath + "/" + PROJECT_PACKAGE_GENERATOR.getBusinessPackageName(actionContainingDirectory)
+            // 项目路径 + 指定子项目的文件夹名 + maven工程结构的固定文件夹 + 指定的包路径
+            path = basePath + "/"
+                    + PROJECT_PACKAGE_GENERATOR.getBusinessPackageName(actionContainingDirectory)
                     + mavenDir
                     + packageGenerator.getBusinessPackageName(actionContainingDirectory).replace(".", "/");
             DirectoryUtil.mkdirs(this.actionPsiManager, path);
