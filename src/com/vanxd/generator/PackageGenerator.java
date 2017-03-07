@@ -3,18 +3,11 @@ package com.vanxd.generator;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiDirectory;
-import com.vanxd.generator.mvc.ControllerPackageGenerator;
-import com.vanxd.generator.mvc.DaoPackageGenerator;
-import com.vanxd.generator.mvc.ServicePackageGenerator;
 
 /**
  * @author wyd on 2017/3/4.
  */
 public abstract class PackageGenerator {
-    public static final PackageGenerator CONTROLLER_PACKAGE_GENERATOR = new ControllerPackageGenerator();
-    public static final PackageGenerator SERVICE_PACKAGE_GENERATOR = new ServicePackageGenerator();
-    public static final PackageGenerator DAO_PACKAGE_GENERATOR = new DaoPackageGenerator();
-
     /** 包名 */
     private String packageName = "";
 
@@ -32,7 +25,12 @@ public abstract class PackageGenerator {
         this.packageName = packageName;
     }
 
-    public PsiDirectory getPackageDirectory(Project project) {
-        return JavaPsiFacade.getInstance(project).findPackage(packageName).getDirectories()[0];
+    public PsiDirectory getBusinessPackageDirectory(Project project, PsiDirectory actionContainingDirectory) {
+        String businessPackageName = getBusinessPackageName(actionContainingDirectory);
+        return JavaPsiFacade.getInstance(project).findPackage(businessPackageName).getDirectories()[0];
+    }
+
+    public String getBusinessPackageName(PsiDirectory actionContainingDirectory) {
+        return packageName + "." + actionContainingDirectory.getName();
     }
 }

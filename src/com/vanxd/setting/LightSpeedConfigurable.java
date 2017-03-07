@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-import static com.vanxd.generator.PackageGenerator.*;
+import static com.vanxd.generator.GeneratorHolder.*;
 
 /**
  * @author wyd on 2017/3/4.

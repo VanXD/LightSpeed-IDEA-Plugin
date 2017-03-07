@@ -5,7 +5,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.psi.PsiFile;
-import com.vanxd.adapter.AllianceGenerator;
+import com.vanxd.generator.AllianceGenerator;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Properties;

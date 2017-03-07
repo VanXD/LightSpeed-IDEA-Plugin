@@ -1,4 +1,4 @@
-package com.vanxd.adapter;
+package com.vanxd.generator;
 
 import com.intellij.ide.fileTemplates.FileTemplate;
 import com.intellij.ide.fileTemplates.FileTemplateManager;
@@ -10,7 +10,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.sun.istack.internal.NotNull;
-import com.vanxd.generator.PackageGenerator;
 import com.vanxd.generator.mvc.DaoImplPackageGenerator;
 import com.vanxd.generator.mvc.ServiceImplPackageGenerator;
 import com.vanxd.setting.LightSpeedSetting;
@@ -21,6 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import static com.vanxd.generator.GeneratorHolder.CONTROLLER_PACKAGE_GENERATOR;
+import static com.vanxd.generator.GeneratorHolder.DAO_PACKAGE_GENERATOR;
+import static com.vanxd.generator.GeneratorHolder.SERVICE_PACKAGE_GENERATOR;
+
 /**
  * @author wyd on 2017/3/6.
  */
@@ -29,16 +32,19 @@ public class AllianceGenerator {
     private final List<PackageGenerator> packageGenerators = new ArrayList<>();
     PsiFile actionPsiFile;
     PsiManager actionPsiManager;
+    PsiDirectory actionContainingDirectory;
+    Project actionProject;
 
     public AllianceGenerator(@NotNull PsiFile actionPsiFile) {
         this.actionPsiFile = actionPsiFile;
-        actionPsiManager = actionPsiFile.getContainingDirectory().getManager();
-        PsiDirectory containingDirectory = actionPsiFile.getContainingDirectory();
-        packageGenerators.add(PackageGenerator.CONTROLLER_PACKAGE_GENERATOR);
-        packageGenerators.add(PackageGenerator.SERVICE_PACKAGE_GENERATOR);
-        packageGenerators.add(new ServiceImplPackageGenerator(containingDirectory, PackageGenerator.SERVICE_PACKAGE_GENERATOR));
-        packageGenerators.add(PackageGenerator.DAO_PACKAGE_GENERATOR);
-        packageGenerators.add(new DaoImplPackageGenerator(containingDirectory, PackageGenerator.DAO_PACKAGE_GENERATOR));
+        this.actionPsiManager = actionPsiFile.getContainingDirectory().getManager();
+        this.actionContainingDirectory = actionPsiFile.getContainingDirectory();
+        this.actionProject = actionPsiFile.getProject();
+        packageGenerators.add(CONTROLLER_PACKAGE_GENERATOR);
+        packageGenerators.add(SERVICE_PACKAGE_GENERATOR);
+        packageGenerators.add(new ServiceImplPackageGenerator(actionContainingDirectory, SERVICE_PACKAGE_GENERATOR));
+        packageGenerators.add(DAO_PACKAGE_GENERATOR);
+        packageGenerators.add(new DaoImplPackageGenerator(actionContainingDirectory, DAO_PACKAGE_GENERATOR));
         createGeneratorPackageDirectory();
     }
 
@@ -48,12 +54,12 @@ public class AllianceGenerator {
         FileTemplate fileTemplate;
         PsiElement fromTemplate = null;
         for (String templateName : templateNames) {
-            project = this.actionPsiFile.getProject();
+            project = this.actionProject;
             fileTemplate = FileTemplateManager.getInstance(project).getJ2eeTemplate(templateName);
             fromTemplate = null;
             for (PackageGenerator packageGenerator : packageGenerators) {
                 if (StringUtils.isNotEmpty(packageGenerator.getPackageName()) && templateName.lastIndexOf(packageGenerator.getSuffix()) > -1) {
-                    packageDirectory = packageGenerator.getPackageDirectory(project);
+                    packageDirectory = packageGenerator.getBusinessPackageDirectory(project, actionContainingDirectory);
                     fromTemplate = FileUtil.createFromTemplate(fileTemplate, properties, packageDirectory);
                     break;
                 }
@@ -69,9 +75,11 @@ public class AllianceGenerator {
      * 创建包目录
      */
     private void createGeneratorPackageDirectory() {
-        String basePath = actionPsiFile.getProject().getBasePath();
+        String basePath = this.actionProject.getBasePath();
+        String path = "";
         for (PackageGenerator packageGenerator : packageGenerators) {
-            DirectoryUtil.mkdirs(this.actionPsiManager, basePath + "/src/" + packageGenerator.getPackageName().replace(".", "/"));
+            path = basePath + "/src/main/java/" + packageGenerator.getBusinessPackageName(actionContainingDirectory).replace(".", "/");
+            DirectoryUtil.mkdirs(this.actionPsiManager, path);
         }
     }
 }

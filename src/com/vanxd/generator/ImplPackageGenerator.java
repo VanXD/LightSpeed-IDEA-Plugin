@@ -27,4 +27,9 @@ public abstract class ImplPackageGenerator extends PackageGenerator{
     public PackageGenerator getParentPackageGenerator() {
         return parentPackageGenerator;
     }
+
+    @Override
+    public String getBusinessPackageName(PsiDirectory actionContainingDirectory) {
+        return getPackageName();
+    }
 }

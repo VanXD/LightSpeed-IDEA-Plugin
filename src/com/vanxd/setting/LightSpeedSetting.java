@@ -7,7 +7,9 @@ import com.vanxd.generator.PackageGenerator;
 import org.jdom.Element;
 import org.jetbrains.annotations.Nullable;
 
-import static com.vanxd.generator.PackageGenerator.*;
+import static com.vanxd.generator.GeneratorHolder.CONTROLLER_PACKAGE_GENERATOR;
+import static com.vanxd.generator.GeneratorHolder.DAO_PACKAGE_GENERATOR;
+import static com.vanxd.generator.GeneratorHolder.SERVICE_PACKAGE_GENERATOR;
 
 /**
  * @author wyd on 2017/3/4.
