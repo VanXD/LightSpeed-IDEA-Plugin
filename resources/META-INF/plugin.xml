@@ -36,7 +36,7 @@
     </action>
 
     <!-- 打开class文件夹所在文件夹 -->
-    <action id="OpenClassDirectory" class="com.vanxd.action.OpenClassDirectoryAction" text="OpenClassDirectoryAction" description="Show Class">
+    <action id="OpenClassDirectory" class="com.vanxd.action.OpenClassDirectoryAction" text="Show Class" description="Show Class">
       <add-to-group group-id="GenerateGroup" anchor="first"/>
     </action>
   </actions>
