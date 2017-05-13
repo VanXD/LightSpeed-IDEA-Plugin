@@ -1,0 +1,24 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
+@Controller
+@RequestMapping("")
+public class ${NAME}Controller extends BaseController {
+    @Autowired
+    private I${NAME}Service ${CAMEL_NAME}ServiceImpl;
+
+    /**
+     * 分页列表
+     * @param queryCondition
+     * @return
+     */
+    @RequestMapping("/list.json")
+    @ResponseBody
+    public BaseDomain list(${NAME} queryCondition) {
+
+        List<${NAME}> list = new ArrayList<>();
+        int count = ${CAMEL_NAME}ServiceImpl.count(queryCondition);
+        if(count > 0) {
+            list = ${CAMEL_NAME}ServiceImpl.findAll(queryCondition);
+        }
+        return new BaseDomain(queryCondition.getPage(), queryCondition.getPageSize(), count, list);
+    }
+}

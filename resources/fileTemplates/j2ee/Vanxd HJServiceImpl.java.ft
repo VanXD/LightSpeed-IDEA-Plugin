@@ -1,0 +1,52 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
+@Service
+public class  ${NAME}ServiceImpl implements I${NAME}Service {
+    @Autowired
+    private I${NAME}Dao ${CAMEL_NAME}DaoImpl;
+
+    @Override
+    public List<${NAME}> findAll(${NAME} record) {
+        List<${NAME}> list = ${CAMEL_NAME}DaoImpl.findAll(record);
+        return list;
+    }
+
+    @Override
+    public int count(${NAME} record) {
+        return ${CAMEL_NAME}DaoImpl.count(record);
+    }
+
+    @Override
+    @Transactional("transactionManager2")
+    public boolean deleteByPrimaryKey(String id) {
+        return ${CAMEL_NAME}DaoImpl.deleteByPrimaryKey(id) > 0;
+    }
+
+    @Override
+    @Transactional("transactionManager2")
+    public boolean insert(${NAME} record) {
+        return ${CAMEL_NAME}DaoImpl.insert(record) > 0;
+    }
+
+    @Override
+    @Transactional("transactionManager2")
+    public boolean insertSelective(${NAME} record) {
+        return ${CAMEL_NAME}DaoImpl.insertSelective(record) > 0;
+    }
+
+    @Override
+    public ${NAME} selectByPrimaryKey(String id) {
+        return ${CAMEL_NAME}DaoImpl.selectByPrimaryKey(id);
+    }
+
+    @Override
+    @Transactional("transactionManager2")
+    public boolean updateByPrimaryKeySelective(${NAME} record) {
+        return ${CAMEL_NAME}DaoImpl.updateByPrimaryKeySelective(record) > 0;
+    }
+
+    @Override
+    @Transactional("transactionManager2")
+    public boolean updateByPrimaryKey(${NAME} record) {
+        return ${CAMEL_NAME}DaoImpl.updateByPrimaryKey(record) > 0;
+    }
+}

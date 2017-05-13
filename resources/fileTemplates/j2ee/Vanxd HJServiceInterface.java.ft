@@ -1,0 +1,18 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
+public interface I${NAME}Service {
+    List<${NAME}> findAll(${NAME} record);
+
+    int count(${NAME} record);
+
+    boolean deleteByPrimaryKey(Integer id);
+
+    boolean insert(${NAME} record);
+
+    boolean insertSelective(${NAME} record);
+
+    ${NAME} selectByPrimaryKey(Integer id);
+
+    boolean updateByPrimaryKeySelective(${NAME} record);
+
+    boolean updateByPrimaryKey(${NAME} record);
+}
