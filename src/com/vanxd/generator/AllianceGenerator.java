@@ -56,18 +56,23 @@ public class AllianceGenerator {
             project = this.actionProject;
             fileTemplate = FileTemplateManager.getInstance(project).getJ2eeTemplate(templateName);
             fromTemplate = null;
-            for (PackageGenerator packageGenerator : packageGenerators) {
-                if (StringUtils.isNotEmpty(packageGenerator.getPackageName()) && templateName.lastIndexOf(packageGenerator.getSuffix()) > -1) {
-                    packageDirectory = packageGenerator.getBusinessPackageDirectory(project, actionContainingDirectory);
-                    fromTemplate = FileUtil.createFromTemplate(fileTemplate, properties, packageDirectory);
-                    break;
-                }
-            }
-            if (null == fromTemplate) {
-                fromTemplate = FileUtil.createFromTemplate(fileTemplate, properties, actionPsiFile.getContainingDirectory());
-            }
+            doCreateFile(properties, project, fileTemplate, fromTemplate, templateName);
         }
 
+    }
+
+    private void doCreateFile(@NotNull Properties properties, Project project, FileTemplate fileTemplate, PsiElement fromTemplate, String templateName) {
+        PsiDirectory packageDirectory;
+        for (PackageGenerator packageGenerator : packageGenerators) {
+            if (StringUtils.isNotEmpty(packageGenerator.getPackageName()) && templateName.lastIndexOf(packageGenerator.getSuffix()) > -1) {
+                packageDirectory = packageGenerator.getBusinessPackageDirectory(project, actionContainingDirectory);
+                fromTemplate = FileUtil.createFromTemplate(fileTemplate, properties, packageDirectory);
+                return;
+            }
+        }
+        if (null == fromTemplate) {
+            fromTemplate = FileUtil.createFromTemplate(fileTemplate, properties, actionPsiFile.getContainingDirectory());
+        }
     }
 
     /**

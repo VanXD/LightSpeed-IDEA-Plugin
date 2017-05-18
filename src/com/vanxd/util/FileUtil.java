@@ -57,7 +57,7 @@ public class FileUtil {
         try {
             return FileTemplateUtil.createFromTemplate(template, "", properties, directory);
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return null;
     }
