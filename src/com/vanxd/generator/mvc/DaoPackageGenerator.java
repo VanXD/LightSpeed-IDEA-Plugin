@@ -13,6 +13,6 @@ public class DaoPackageGenerator extends PackageGenerator {
 
     @Override
     public String getSuffix() {
-        return "DaoInterface";
+        return "Dao";
     }
 }

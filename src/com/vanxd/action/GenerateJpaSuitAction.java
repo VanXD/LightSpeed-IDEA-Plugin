@@ -6,7 +6,7 @@ package com.vanxd.action;
  *
  * @author wyd on 2016/12/16.
  */
-public class GenerateVanSuitAction extends GenerateAction {
+public class GenerateJpaSuitAction extends GenerateAction {
 
     @Override
     protected String[] getTemplates() {
