@@ -1,11 +1,12 @@
 package com.vanxd.admin.service.${CONTAINER_NAME}.impl;
+
 @Service
-public class  ${NAME}ServiceImpl extends BaseServiceImpl<${NAME}, ${NAME}Dao> implements ${NAME}Service {
+public class ${NAME}ServiceImpl extends BaseServiceImpl<${NAME}> implements ${NAME}Service {
     @Autowired
-    private ${NAME}Dao ${CAMEL_NAME}Dao;
+    private NovelDao ${NAME}Dao;
 
     @Override
-    public ${NAME}Dao getMapper() {
+    public PagingAndSortingRepository getDao() {
         return ${CAMEL_NAME}Dao;
     }
 }
