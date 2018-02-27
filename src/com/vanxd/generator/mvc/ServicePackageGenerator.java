@@ -13,6 +13,6 @@ public class ServicePackageGenerator extends PackageGenerator {
 
     @Override
     public String getSuffix() {
-        return "ServiceInterface";
+        return "Service";
     }
 }

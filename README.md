@@ -17,5 +17,6 @@
     3.  Service实现累模板文件：名称结尾ServiceImpl
     4.  插件会自动创建包所在的文件夹
     5.  需要打开idea的自动引用
+    6.  模板的后缀（空格后面的那个单词）要与PackageGenerator的suffix相同
 1.  File -> Settings -> Other Settings -> LightSpeed 中进行各层包的配置
 2.  BO中按alt+insert，选择Generate Suit

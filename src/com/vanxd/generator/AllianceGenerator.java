@@ -26,7 +26,7 @@ import static com.vanxd.generator.GeneratorHolder.*;
  * @author wyd on 2017/3/6.
  */
 public class AllianceGenerator {
-    private static final String mavenDir = "/src/main/java/";
+    private static final String mavenDir = "src/main/java/";
     private static final LightSpeedSetting lightSpeedSetting = ServiceManager.getService(LightSpeedSetting.class);
     private final List<PackageGenerator> packageGenerators = new ArrayList<>();
     private PsiFile actionPsiFile;
@@ -63,8 +63,9 @@ public class AllianceGenerator {
 
     private void doCreateFile(@NotNull Properties properties, Project project, FileTemplate fileTemplate, PsiElement fromTemplate, String templateName) {
         PsiDirectory packageDirectory;
+        String templateNameSuffix = templateName.substring(templateName.indexOf(" ") + 1);
         for (PackageGenerator packageGenerator : packageGenerators) {
-            if (StringUtils.isNotEmpty(packageGenerator.getPackageName()) && templateName.lastIndexOf(packageGenerator.getSuffix()) > -1) {
+            if (StringUtils.isNotEmpty(packageGenerator.getPackageName()) && templateNameSuffix.equals(packageGenerator.getSuffix())) {
                 packageDirectory = packageGenerator.getBusinessPackageDirectory(project, actionContainingDirectory);
                 fromTemplate = FileUtil.createFromTemplate(fileTemplate, properties, packageDirectory);
                 return;
