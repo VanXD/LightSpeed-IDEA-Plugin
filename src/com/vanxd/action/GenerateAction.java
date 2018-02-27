@@ -5,6 +5,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.impl.source.PsiJavaFileImpl;
 import com.vanxd.generator.AllianceGenerator;
 import com.vanxd.generator.GeneratorHolder;
 import org.jetbrains.annotations.NotNull;
@@ -19,8 +20,7 @@ public abstract class GenerateAction extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent e) {
         PsiFile actionPsiFile = e.getData(LangDataKeys.PSI_FILE);
-        String entityName = actionPsiFile.getName().substring(0, actionPsiFile.getName().indexOf("."));
-        Properties properties = getProperties(entityName);
+        Properties properties = getProperties(actionPsiFile);
 
         AllianceGenerator allianceGenerator = new AllianceGenerator(actionPsiFile);
         allianceGenerator.createFromTemplate(getTemplates(), properties);
@@ -33,9 +33,13 @@ public abstract class GenerateAction extends AnAction {
     protected abstract String[] getTemplates();
 
     @NotNull
-    private Properties getProperties(String entityName) {
+    private Properties getProperties(PsiFile actionPsiFile) {
+        String packageName = ((PsiJavaFileImpl) actionPsiFile).getPackageName();
+        String containerName = packageName.substring(packageName.lastIndexOf(".") + 1);
+        String entityName = actionPsiFile.getName().substring(0, actionPsiFile.getName().indexOf("."));
         Properties properties = new Properties();
         properties.setProperty(FileTemplate.ATTRIBUTE_NAME, entityName);
+        properties.setProperty("CONTAINER_NAME", containerName);
         properties.setProperty("CAMEL_NAME", Character.toLowerCase(entityName.charAt(0)) + entityName.substring(1));
         if (GeneratorHolder.SHIRO_SUPPORT) {
             properties.setProperty("SHIRO_REQUIRES_PERMISSIONS", "@RequiresPermissions(\"\")");

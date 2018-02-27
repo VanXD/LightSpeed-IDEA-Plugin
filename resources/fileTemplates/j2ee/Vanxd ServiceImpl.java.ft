@@ -1,4 +1,4 @@
-package com.vanxd.admin.service.todo.impl;
+package com.vanxd.admin.service.${CONTAINER_NAME}.impl;
 @Service
 public class  ${NAME}ServiceImpl extends BaseServiceImpl<${NAME}, ${NAME}Mapper> implements ${NAME}Service {
     @Autowired
