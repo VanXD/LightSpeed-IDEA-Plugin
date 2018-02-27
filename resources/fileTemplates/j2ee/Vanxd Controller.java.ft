@@ -1,7 +1,7 @@
 package com.vanxd.admin.controller.todo;
 @Controller
 @RequestMapping("")
-@RequiresPermissions("")
+${SHIRO_REQUIRES_PERMISSIONS}
 public class ${NAME}Controller extends BaseController<${NAME}, ${NAME}Service>{
     @Autowired
     private ${NAME}Service ${CAMEL_NAME}ServiceImpl;

@@ -38,7 +38,8 @@ public class LightSpeedConfigurable implements SearchableConfigurable {
         return  !CONTROLLER_PACKAGE_GENERATOR.getPackageName().equals(configForm.controllerPackageName.getText())
             ||  !SERVICE_PACKAGE_GENERATOR.getPackageName().equals(configForm.servicePackageName.getText())
             ||  !DAO_PACKAGE_GENERATOR.getPackageName().equals(configForm.daoPackageName.getText())
-            ||  !PROJECT_PACKAGE_GENERATOR.getPackageName().equals(configForm.projectDirectoryName.getText());
+            ||  !PROJECT_PACKAGE_GENERATOR.getPackageName().equals(configForm.projectDirectoryName.getText())
+            ||  !SHIRO_SUPPORT.equals(configForm.supportShiro.isSelected());
     }
 
     @Override
@@ -47,6 +48,7 @@ public class LightSpeedConfigurable implements SearchableConfigurable {
         CONTROLLER_PACKAGE_GENERATOR.setPackageName(configForm.controllerPackageName.getText());
         SERVICE_PACKAGE_GENERATOR.setPackageName(configForm.servicePackageName.getText());
         DAO_PACKAGE_GENERATOR.setPackageName(configForm.daoPackageName.getText());
+        SHIRO_SUPPORT = configForm.supportShiro.isSelected();
     }
 
     @Override
@@ -55,6 +57,7 @@ public class LightSpeedConfigurable implements SearchableConfigurable {
         configForm.controllerPackageName.setText(CONTROLLER_PACKAGE_GENERATOR.getPackageName());
         configForm.servicePackageName.setText(SERVICE_PACKAGE_GENERATOR.getPackageName());
         configForm.daoPackageName.setText(DAO_PACKAGE_GENERATOR.getPackageName());
+        configForm.supportShiro.setSelected(SHIRO_SUPPORT);
     }
 
     @Override

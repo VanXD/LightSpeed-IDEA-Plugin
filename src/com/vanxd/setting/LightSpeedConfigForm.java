@@ -15,4 +15,5 @@ public class LightSpeedConfigForm {
     public JLabel DAOPackageLabel;
     public JLabel SERVICEPackageLabel;
     public JPanel inputPanel;
+    public JCheckBox supportShiro;
 }
