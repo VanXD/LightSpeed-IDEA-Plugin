@@ -34,6 +34,9 @@
     <action id="com.vanxd.action.GenerateVanSuitAction" class="com.vanxd.action.GenerateVanSuitAction" text="Generate Suit" description="com.vanxd.action.GenerateVanSuitAction">
       <add-to-group group-id="GenerateGroup" anchor="first"/>
     </action>
+    <action id="com.vanxd.action.GenerateJpaSuitAction" class="com.vanxd.action.GenerateJpaSuitAction" text="JPA Suit" description="com.vanxd.action.GenerateJpaSuitAction">
+      <add-to-group group-id="GenerateGroup" anchor="first"/>
+    </action>
     <!-- 打开class文件夹所在文件夹 -->
     <action id="OpenClassDirectory" class="com.vanxd.action.OpenClassDirectoryAction" text="Show Class" description="Show Class">
       <add-to-group group-id="GenerateGroup" anchor="first"/>

@@ -1,0 +1,3 @@
+package com.vanxd.admin.service.todo;
+public interface  ${NAME}Service  extends BaseService<${NAME}, ${NAME}Dao> {
+}

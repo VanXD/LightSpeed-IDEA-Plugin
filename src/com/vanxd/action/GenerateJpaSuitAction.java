@@ -10,6 +10,6 @@ public class GenerateJpaSuitAction extends GenerateAction {
 
     @Override
     protected String[] getTemplates() {
-        return new String[]{"Vanxd Service", "Vanxd ServiceImpl", "Vanxd Controller"};
+        return new String[]{"Jpa Dao", "Jpa Service", "Jpa ServiceImpl", "Vanxd Controller"};
     }
 }

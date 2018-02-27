@@ -15,6 +15,7 @@
     1.  Controller模板文件：名称结尾Controller
     2.  Service接口模板文件：名称结尾ServiceInterface
     3.  Service实现累模板文件：名称结尾ServiceImpl
-    5.  插件会自动创建包所在的文件夹
+    4.  插件会自动创建包所在的文件夹
+    5.  需要打开idea的自动引用
 1.  File -> Settings -> Other Settings -> LightSpeed 中进行各层包的配置
 2.  BO中按alt+insert，选择Generate Suit

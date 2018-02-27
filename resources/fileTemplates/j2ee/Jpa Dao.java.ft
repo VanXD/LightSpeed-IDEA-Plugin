@@ -1,0 +1,8 @@
+package com.vanxd.morethannovel.dao.todo;
+
+import com.vanxd.morethannovel.entity.novel.Novel;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+public interface ${NAME}Dao extends PagingAndSortingRepository<${NAME}, Integer> {
+
+}

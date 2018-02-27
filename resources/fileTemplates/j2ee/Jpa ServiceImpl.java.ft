@@ -1,0 +1,11 @@
+package com.vanxd.admin.service.todo.impl;
+@Service
+public class  ${NAME}ServiceImpl extends BaseServiceImpl<${NAME}, ${NAME}Dao> implements ${NAME}Service {
+    @Autowired
+    private ${NAME}Dao ${CAMEL_NAME}Dao;
+
+    @Override
+    public ${NAME}Dao getMapper() {
+        return ${CAMEL_NAME}Dao;
+    }
+}
