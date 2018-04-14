@@ -5,10 +5,12 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.ui.TitlePanel;
 import com.intellij.psi.PsiFile;
 import com.vanxd.generator.ConfigurationHolder;
+import com.vanxd.setting.LightSpeedSetting;
 import org.apache.commons.lang.StringUtils;
 
 import javax.swing.*;
@@ -21,6 +23,9 @@ import java.io.InputStream;
  * @author wyd
  */
 public class TransferClassAction extends AnAction {
+    // 哎,这东西是真的坑,项目启动的时候为啥不自动加载已有配置
+    LightSpeedSetting service = ServiceManager.getService(LightSpeedSetting.class);
+
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
         if (StringUtils.isEmpty(ConfigurationHolder.PSCP_CMD_FIELD)) {

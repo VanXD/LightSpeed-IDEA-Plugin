@@ -31,9 +31,9 @@
   <actions>
     <!-- Add your actions here -->
     <!-- mine suit -->
-    <action id="com.vanxd.action.GenerateVanSuitAction" class="com.vanxd.action.GenerateVanSuitAction" text="Generate Suit" description="com.vanxd.action.GenerateVanSuitAction">
-      <add-to-group group-id="GenerateGroup" anchor="first"/>
-    </action>
+    <!--<action id="com.vanxd.action.GenerateVanSuitAction" class="com.vanxd.action.GenerateVanSuitAction" text="Generate Suit" description="com.vanxd.action.GenerateVanSuitAction">-->
+      <!--<add-to-group group-id="GenerateGroup" anchor="first"/>-->
+    <!--</action>-->
     <action id="com.vanxd.action.GenerateJpaSuitAction" class="com.vanxd.action.GenerateJpaSuitAction" text="JPA Suit" description="com.vanxd.action.GenerateJpaSuitAction">
       <add-to-group group-id="GenerateGroup" anchor="first"/>
     </action>
