@@ -1,16 +1,21 @@
 # LightSpeed-IDEA-Plugin
 可以直接生成BO的Service接口、ServiceImpl、Controller
 
-#   打JAR包
+## 主要功能
+1.  生成MVC基本代码
+2.  将文件传输到远程服务器: 依赖pscp, 执行了命令行,传入了文件路径,其实做什么都行.~
+
+
+##   打JAR包
 1.右键工程
 2.底部有一个"Prepare Plugin Module...."
 
-#   使用
+##   使用
 1.  BO中按alt+insert，选择Generate Suit
 2.  BO所在包中会生成该BO的三件套
 3.  对插件进行配置后，可以将文件生成到对应的包下，不配置则生成在当前目录
 
-#   使用
+##   使用
 0.  模板文件编写，模板文件名称需要规范（注意大小写）
     1.  Controller模板文件：名称结尾Controller
     2.  Service接口模板文件：名称结尾ServiceInterface
