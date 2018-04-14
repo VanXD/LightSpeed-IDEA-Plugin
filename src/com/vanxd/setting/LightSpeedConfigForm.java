@@ -16,4 +16,6 @@ public class LightSpeedConfigForm {
     public JLabel SERVICEPackageLabel;
     public JPanel inputPanel;
     public JCheckBox supportShiro;
+    public JLabel pscpCmdName;
+    public JTextField pscpCmdField;
 }

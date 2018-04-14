@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-import static com.vanxd.generator.GeneratorHolder.*;
+import static com.vanxd.generator.ConfigurationHolder.*;
 
 /**
  * @author wyd on 2017/3/4.
@@ -39,7 +39,8 @@ public class LightSpeedConfigurable implements SearchableConfigurable {
             ||  !SERVICE_PACKAGE_GENERATOR.getPackageName().equals(configForm.servicePackageName.getText())
             ||  !DAO_PACKAGE_GENERATOR.getPackageName().equals(configForm.daoPackageName.getText())
             ||  !PROJECT_PACKAGE_GENERATOR.getPackageName().equals(configForm.projectDirectoryName.getText())
-            ||  !SHIRO_SUPPORT.equals(configForm.supportShiro.isSelected());
+            ||  !SHIRO_SUPPORT.equals(configForm.supportShiro.isSelected()
+            ||  !PSCP_CMD_FIELD.equals(configForm.pscpCmdField));
     }
 
     @Override
@@ -49,6 +50,7 @@ public class LightSpeedConfigurable implements SearchableConfigurable {
         SERVICE_PACKAGE_GENERATOR.setPackageName(configForm.servicePackageName.getText());
         DAO_PACKAGE_GENERATOR.setPackageName(configForm.daoPackageName.getText());
         SHIRO_SUPPORT = configForm.supportShiro.isSelected();
+        PSCP_CMD_FIELD = configForm.pscpCmdField.getText();
     }
 
     @Override
@@ -58,6 +60,7 @@ public class LightSpeedConfigurable implements SearchableConfigurable {
         configForm.servicePackageName.setText(SERVICE_PACKAGE_GENERATOR.getPackageName());
         configForm.daoPackageName.setText(DAO_PACKAGE_GENERATOR.getPackageName());
         configForm.supportShiro.setSelected(SHIRO_SUPPORT);
+        configForm.pscpCmdField.setText(PSCP_CMD_FIELD);
     }
 
     @Override

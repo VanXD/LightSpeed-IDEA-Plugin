@@ -7,7 +7,7 @@ import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.PsiJavaFileImpl;
 import com.vanxd.generator.AllianceGenerator;
-import com.vanxd.generator.GeneratorHolder;
+import com.vanxd.generator.ConfigurationHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Properties;
@@ -41,7 +41,7 @@ public abstract class GenerateAction extends AnAction {
         properties.setProperty(FileTemplate.ATTRIBUTE_NAME, entityName);
         properties.setProperty("CONTAINER_NAME", containerName);
         properties.setProperty("CAMEL_NAME", Character.toLowerCase(entityName.charAt(0)) + entityName.substring(1));
-        if (GeneratorHolder.SHIRO_SUPPORT) {
+        if (ConfigurationHolder.SHIRO_SUPPORT) {
             properties.setProperty("SHIRO_REQUIRES_PERMISSIONS", "@RequiresPermissions(\"\")");
         }
         setCustomerProperty(properties);

@@ -7,7 +7,7 @@ import com.vanxd.generator.PackageGenerator;
 import org.jdom.Element;
 import org.jetbrains.annotations.Nullable;
 
-import static com.vanxd.generator.GeneratorHolder.*;
+import static com.vanxd.generator.ConfigurationHolder.*;
 
 /**
  * @author wyd on 2017/3/4.

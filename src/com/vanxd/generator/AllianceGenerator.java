@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import static com.vanxd.generator.GeneratorHolder.*;
+import static com.vanxd.generator.ConfigurationHolder.*;
 
 /**
  * @author wyd on 2017/3/6.

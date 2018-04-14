@@ -17,9 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import static com.vanxd.generator.GeneratorHolder.CONTROLLER_PACKAGE_GENERATOR;
-import static com.vanxd.generator.GeneratorHolder.DAO_PACKAGE_GENERATOR;
-import static com.vanxd.generator.GeneratorHolder.SERVICE_PACKAGE_GENERATOR;
+import static com.vanxd.generator.ConfigurationHolder.CONTROLLER_PACKAGE_GENERATOR;
+import static com.vanxd.generator.ConfigurationHolder.DAO_PACKAGE_GENERATOR;
+import static com.vanxd.generator.ConfigurationHolder.SERVICE_PACKAGE_GENERATOR;
 
 /**
  * @author wyd on 2016/12/16.
