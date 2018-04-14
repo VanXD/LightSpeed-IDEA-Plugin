@@ -40,7 +40,7 @@ public class LightSpeedConfigurable implements SearchableConfigurable {
             ||  !DAO_PACKAGE_GENERATOR.getPackageName().equals(configForm.daoPackageName.getText())
             ||  !PROJECT_PACKAGE_GENERATOR.getPackageName().equals(configForm.projectDirectoryName.getText())
             ||  !SHIRO_SUPPORT.equals(configForm.supportShiro.isSelected()
-            ||  !PSCP_CMD_FIELD.equals(configForm.pscpCmdField));
+            ||  !PSCP_CMD_FIELD.equals(configForm.pscpCmdField.getText()));
     }
 
     @Override

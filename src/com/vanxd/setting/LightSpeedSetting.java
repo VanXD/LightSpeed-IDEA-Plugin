@@ -23,6 +23,8 @@ public class LightSpeedSetting implements PersistentStateComponent<Element> {
         element.setAttribute(CONTROLLER_PACKAGE_GENERATOR.getId(), CONTROLLER_PACKAGE_GENERATOR.getPackageName());
         element.setAttribute(SERVICE_PACKAGE_GENERATOR.getId(), SERVICE_PACKAGE_GENERATOR.getPackageName());
         element.setAttribute(DAO_PACKAGE_GENERATOR.getId(), DAO_PACKAGE_GENERATOR.getPackageName());
+        element.setAttribute("SHIRO_SUPPORT", SHIRO_SUPPORT.toString());
+        element.setAttribute("PSCP_CMD_FIELD", PSCP_CMD_FIELD);
         return element;
     }
 
@@ -32,6 +34,8 @@ public class LightSpeedSetting implements PersistentStateComponent<Element> {
         loadState(element, CONTROLLER_PACKAGE_GENERATOR);
         loadState(element, SERVICE_PACKAGE_GENERATOR);
         loadState(element, DAO_PACKAGE_GENERATOR);
+        SHIRO_SUPPORT = Boolean.valueOf(element.getAttributeValue("SHIRO_SUPPORT"));
+        PSCP_CMD_FIELD = null == element.getAttributeValue("PSCP_CMD_FIELD") ? "" : element.getAttributeValue("PSCP_CMD_FIELD");
     }
 
     private void loadState(Element element, PackageGenerator generator) {
