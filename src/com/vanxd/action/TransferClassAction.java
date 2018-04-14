@@ -9,11 +9,13 @@ import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.ui.TitlePanel;
 import com.intellij.psi.PsiFile;
+import com.intellij.ui.awt.RelativePoint;
 import com.vanxd.generator.ConfigurationHolder;
 import com.vanxd.setting.LightSpeedSetting;
 import org.apache.commons.lang.StringUtils;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -33,18 +35,17 @@ public class TransferClassAction extends AnAction {
         }
         PsiFile actionPsiFile = anActionEvent.getData(LangDataKeys.PSI_FILE);
         String fileName = actionPsiFile.getName();
-        if (!fileName.contains(".java")) {
-            return;
-        }
         String className = fileName.replace(".java", ".class");
         String filePath = actionPsiFile.getContainingDirectory().getVirtualFile().getPath();
-        String targetDirectoryPath = filePath.replace("src/main/java", "target/classes");
-        String targetClassPath = targetDirectoryPath + "/" + className;
-        String targetCmd = String.format(ConfigurationHolder.PSCP_CMD_FIELD, targetClassPath);
+        if (fileName.contains(".java")) {
+            filePath = filePath.replace("src/main/java", "target/classes");
+        }
+        String finalFilePath = filePath + "/" + className;
+        String targetCmd = String.format(ConfigurationHolder.PSCP_CMD_FIELD, finalFilePath);
         try {
             Process exec = Runtime.getRuntime().exec(targetCmd);
             String msg = getResponse(exec);
-            hint(anActionEvent, msg);
+            hint(msg);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -60,9 +61,9 @@ public class TransferClassAction extends AnAction {
         return new String(bytes);
     }
 
-    private void hint(AnActionEvent anActionEvent, String msg) {
-        Editor editor = anActionEvent.getData(PlatformDataKeys.EDITOR);
+    private void hint(String msg) {
+        RelativePoint relativePoint = new RelativePoint(new Point(9999, 9999));
         JComponent jComponent = new TitlePanel("传输提示", msg);
-        HintManager.getInstance().showInformationHint(editor, jComponent);
+        HintManager.getInstance().showHint(jComponent, relativePoint, 0, 2000);
     }
 }
