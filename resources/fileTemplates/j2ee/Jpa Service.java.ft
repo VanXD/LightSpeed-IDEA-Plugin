@@ -1,3 +1,3 @@
 package com.vanxd.admin.service.${CONTAINER_NAME};
-public interface  ${NAME}Service  extends BaseService<${NAME}, ${NAME}Dao> {
+public interface  ${NAME}Service  extends BaseService<${NAME}, Integer> {
 }
