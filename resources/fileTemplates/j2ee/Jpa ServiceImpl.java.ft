@@ -3,7 +3,7 @@ package com.vanxd.admin.service.${CONTAINER_NAME}.impl;
 @Service
 public class ${NAME}ServiceImpl extends BaseServiceImpl<${NAME}> implements ${NAME}Service {
     @Autowired
-    private NovelDao ${NAME}Dao;
+    private ${NAME}Dao ${CAMEL_NAME}Dao;
 
     @Override
     public PagingAndSortingRepository getDao() {
