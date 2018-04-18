@@ -44,7 +44,6 @@ public class AllianceGenerator {
         packageGenerators.add(new ServiceImplPackageGenerator(actionContainingDirectory, SERVICE_PACKAGE_GENERATOR));
         packageGenerators.add(DAO_PACKAGE_GENERATOR);
         packageGenerators.add(new DaoImplPackageGenerator(actionContainingDirectory, DAO_PACKAGE_GENERATOR));
-        createGeneratorPackageDirectory();
     }
 
     public void createFromTemplate(@NotNull String[] templateNames, @NotNull Properties properties) {
@@ -66,32 +65,13 @@ public class AllianceGenerator {
         String templateNameSuffix = templateName.substring(templateName.indexOf(" ") + 1);
         for (PackageGenerator packageGenerator : packageGenerators) {
             if (StringUtils.isNotEmpty(packageGenerator.getPackageName()) && templateNameSuffix.equals(packageGenerator.getSuffix())) {
-                packageDirectory = packageGenerator.getBusinessPackageDirectory(project, actionContainingDirectory);
+                packageDirectory = packageGenerator.getBusinessPackageDirectory(actionPsiManager, actionContainingDirectory);
                 fromTemplate = FileUtil.createFromTemplate(fileTemplate, properties, packageDirectory);
                 return;
             }
         }
         if (null == fromTemplate) {
             fromTemplate = FileUtil.createFromTemplate(fileTemplate, properties, actionPsiFile.getContainingDirectory());
-        }
-    }
-
-    /**
-     * 创建包目录
-     */
-    private void createGeneratorPackageDirectory() {
-        String basePath = this.actionProject.getBasePath();
-        String path = "";
-        for (PackageGenerator packageGenerator : packageGenerators) {
-            if(StringUtils.isEmpty(packageGenerator.getPackageName())) {
-                continue;
-            }
-            // 项目路径 + 指定子项目的文件夹名 + maven工程结构的固定文件夹 + 指定的包路径
-            path = basePath + "/"
-                    + PROJECT_PACKAGE_GENERATOR.getBusinessPackageName(actionContainingDirectory)
-                    + mavenDir
-                    + packageGenerator.getBusinessPackageName(actionContainingDirectory).replace(".", "/");
-            DirectoryUtil.mkdirs(this.actionPsiManager, path);
         }
     }
 }

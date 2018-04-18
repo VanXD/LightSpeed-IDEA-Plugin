@@ -16,7 +16,7 @@ public abstract class ImplPackageGenerator extends PackageGenerator{
         this.actionContainerDirectory = actionContainerDirectory;
         this.parentPackageGenerator = parentPackageGenerator;
         if(StringUtils.isNotEmpty(parentPackageGenerator.getPackageName())) {
-            setPackageName(parentPackageGenerator.getPackageName() + "." + actionContainerDirectory.getName() + ".impl");
+            setPackageName(parentPackageGenerator.getPackageName());
         }
     }
 
@@ -29,7 +29,12 @@ public abstract class ImplPackageGenerator extends PackageGenerator{
     }
 
     @Override
+    public String getPackageName() {
+        return super.getPackageName();
+    }
+
+    @Override
     public String getBusinessPackageName(PsiDirectory actionContainingDirectory) {
-        return getPackageName();
+        return super.getBusinessPackageName(actionContainingDirectory) + ".impl";
     }
 }

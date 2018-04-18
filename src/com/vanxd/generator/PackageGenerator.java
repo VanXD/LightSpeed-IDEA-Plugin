@@ -1,8 +1,13 @@
 package com.vanxd.generator;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.JavaPsiFacade;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.impl.PsiManagerImpl;
+import com.intellij.psi.impl.file.PsiJavaDirectoryFactory;
+
+import java.io.IOException;
 
 /**
  * @author wyd on 2017/3/4.
@@ -25,12 +30,20 @@ public abstract class PackageGenerator {
         this.packageName = packageName;
     }
 
-    public PsiDirectory getBusinessPackageDirectory(Project project, PsiDirectory actionContainingDirectory) {
-        String businessPackageName = getBusinessPackageName(actionContainingDirectory);
-        return JavaPsiFacade.getInstance(project).findPackage(businessPackageName).getDirectories()[0];
+    public PsiDirectory getBusinessPackageDirectory(PsiManager actionPsiManager, PsiDirectory actionContainingDirectory) {
+        String path = actionContainingDirectory.getVirtualFile().getPath();
+        String basePath = path.substring(0, path.indexOf("/com"));
+        String targetPath = basePath + "/" + getBusinessPackageName(actionContainingDirectory).replace(".", "/");
+        VirtualFile directories = null;
+        try {
+            directories = VfsUtil.createDirectories(targetPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new PsiJavaDirectoryFactory((PsiManagerImpl) actionPsiManager).createDirectory(directories);
     }
 
-    public String getBusinessPackageName(PsiDirectory actionContainingDirectory) {
+    protected String getBusinessPackageName(PsiDirectory actionContainingDirectory) {
         return packageName + "." + actionContainingDirectory.getName();
     }
 }
