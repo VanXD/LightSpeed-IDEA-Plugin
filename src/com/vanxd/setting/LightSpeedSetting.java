@@ -12,7 +12,7 @@ import static com.vanxd.generator.ConfigurationHolder.*;
 /**
  * @author wyd on 2017/3/4.
  */
-@State(name = "LightSpeedSettings", storages = @Storage(id = "other", file = "$APP_CONFIG$/LightSpeed.xml"))
+@State(name = "LightSpeedSettings", storages = @Storage(value = "other", file = "$APP_CONFIG$/LightSpeed.xml"))
 public class LightSpeedSetting implements PersistentStateComponent<Element> {
 
     @Nullable
