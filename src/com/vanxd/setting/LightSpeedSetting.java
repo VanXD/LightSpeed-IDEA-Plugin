@@ -7,7 +7,7 @@ import com.vanxd.generator.PackageGenerator;
 import org.jdom.Element;
 import org.jetbrains.annotations.Nullable;
 
-import static com.vanxd.generator.ConfigurationHolder.*;
+import static com.vanxd.generator.ConfigurationHolder.PSCP_CMD_FIELD;
 
 /**
  * @author wyd on 2017/3/4.
@@ -19,22 +19,12 @@ public class LightSpeedSetting implements PersistentStateComponent<Element> {
     @Override
     public Element getState() {
         Element element = new Element("LightSpeedSettings");
-        element.setAttribute(PROJECT_PACKAGE_GENERATOR.getId(), PROJECT_PACKAGE_GENERATOR.getPackageName());
-        element.setAttribute(CONTROLLER_PACKAGE_GENERATOR.getId(), CONTROLLER_PACKAGE_GENERATOR.getPackageName());
-        element.setAttribute(SERVICE_PACKAGE_GENERATOR.getId(), SERVICE_PACKAGE_GENERATOR.getPackageName());
-        element.setAttribute(DAO_PACKAGE_GENERATOR.getId(), DAO_PACKAGE_GENERATOR.getPackageName());
-        element.setAttribute("SHIRO_SUPPORT", SHIRO_SUPPORT.toString());
         element.setAttribute("PSCP_CMD_FIELD", PSCP_CMD_FIELD);
         return element;
     }
 
     @Override
     public void loadState(Element element) {
-        loadState(element, PROJECT_PACKAGE_GENERATOR);
-        loadState(element, CONTROLLER_PACKAGE_GENERATOR);
-        loadState(element, SERVICE_PACKAGE_GENERATOR);
-        loadState(element, DAO_PACKAGE_GENERATOR);
-        SHIRO_SUPPORT = Boolean.valueOf(element.getAttributeValue("SHIRO_SUPPORT"));
         PSCP_CMD_FIELD = null == element.getAttributeValue("PSCP_CMD_FIELD") ? "" : element.getAttributeValue("PSCP_CMD_FIELD");
     }
 

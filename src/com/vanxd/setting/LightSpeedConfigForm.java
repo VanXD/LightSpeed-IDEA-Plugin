@@ -11,9 +11,6 @@ public class LightSpeedConfigForm {
     public JTextField controllerPackageName;
     public JTextField daoPackageName;
     public JTextField servicePackageName;
-    public JLabel CONTROLLERPackageLabel;
-    public JLabel DAOPackageLabel;
-    public JLabel SERVICEPackageLabel;
     public JPanel inputPanel;
     public JCheckBox supportShiro;
     public JLabel pscpCmdName;

@@ -25,8 +25,8 @@ public class OpenClassDirectoryAction extends AnAction {
         String targetDirectoryPath = filePath.replace("src/main/java", "target/classes");
         try {
             targetDirectoryPath = targetDirectoryPath.replace("/", File.separator);
-            Runtime.getRuntime().exec("open " + targetDirectoryPath);
-//            Runtime.getRuntime().exec("explorer " + targetDirectoryPath);
+//            Runtime.getRuntime().exec("open " + targetDirectoryPath);
+            Runtime.getRuntime().exec("explorer " + targetDirectoryPath);
         } catch (IOException e1) {
             e1.printStackTrace();
         }

@@ -1,7 +1,6 @@
 package com.vanxd.setting;
 
 import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SearchableConfigurable;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -9,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-import static com.vanxd.generator.ConfigurationHolder.*;
+import static com.vanxd.generator.ConfigurationHolder.PSCP_CMD_FIELD;
 
 /**
  * @author wyd on 2017/3/4.
@@ -35,31 +34,16 @@ public class LightSpeedConfigurable implements SearchableConfigurable {
 
     @Override
     public boolean isModified() {
-        return  !CONTROLLER_PACKAGE_GENERATOR.getPackageName().equals(configForm.controllerPackageName.getText())
-            ||  !SERVICE_PACKAGE_GENERATOR.getPackageName().equals(configForm.servicePackageName.getText())
-            ||  !DAO_PACKAGE_GENERATOR.getPackageName().equals(configForm.daoPackageName.getText())
-            ||  !PROJECT_PACKAGE_GENERATOR.getPackageName().equals(configForm.projectDirectoryName.getText())
-            ||  !SHIRO_SUPPORT.equals(configForm.supportShiro.isSelected()
-            ||  !PSCP_CMD_FIELD.equals(configForm.pscpCmdField.getText()));
+        return  !PSCP_CMD_FIELD.equals(configForm.pscpCmdField.getText());
     }
 
     @Override
-    public void apply() throws ConfigurationException {
-        PROJECT_PACKAGE_GENERATOR.setPackageName(configForm.projectDirectoryName.getText());
-        CONTROLLER_PACKAGE_GENERATOR.setPackageName(configForm.controllerPackageName.getText());
-        SERVICE_PACKAGE_GENERATOR.setPackageName(configForm.servicePackageName.getText());
-        DAO_PACKAGE_GENERATOR.setPackageName(configForm.daoPackageName.getText());
-        SHIRO_SUPPORT = configForm.supportShiro.isSelected();
+    public void apply() {
         PSCP_CMD_FIELD = configForm.pscpCmdField.getText();
     }
 
     @Override
     public void reset() {
-        configForm.projectDirectoryName.setText(PROJECT_PACKAGE_GENERATOR.getPackageName());
-        configForm.controllerPackageName.setText(CONTROLLER_PACKAGE_GENERATOR.getPackageName());
-        configForm.servicePackageName.setText(SERVICE_PACKAGE_GENERATOR.getPackageName());
-        configForm.daoPackageName.setText(DAO_PACKAGE_GENERATOR.getPackageName());
-        configForm.supportShiro.setSelected(SHIRO_SUPPORT);
         configForm.pscpCmdField.setText(PSCP_CMD_FIELD);
     }
 

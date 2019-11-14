@@ -34,9 +34,9 @@
     <!--<action id="com.vanxd.action.GenerateVanSuitAction" class="com.vanxd.action.GenerateVanSuitAction" text="Generate Suit" description="com.vanxd.action.GenerateVanSuitAction">-->
       <!--<add-to-group group-id="GenerateGroup" anchor="first"/>-->
     <!--</action>-->
-    <action id="com.vanxd.action.GenerateJpaSuitAction" class="com.vanxd.action.GenerateJpaSuitAction" text="JPA Suit" description="com.vanxd.action.GenerateJpaSuitAction">
-      <add-to-group group-id="GenerateGroup" anchor="first"/>
-    </action>
+    <!--<action id="com.vanxd.action.GenerateJpaSuitAction" class="com.vanxd.action.GenerateJpaSuitAction" text="JPA Suit" description="com.vanxd.action.GenerateJpaSuitAction">-->
+      <!--<add-to-group group-id="GenerateGroup" anchor="first"/>-->
+    <!--</action>-->
     <!-- 使用pscp传输class到远程服务器 -->
     <action id="com.vanxd.action.TransferClassAction" class="com.vanxd.action.TransferClassAction" text="Transfer Class" description="Transfer Class">
       <add-to-group group-id="GenerateGroup" anchor="first"/>
