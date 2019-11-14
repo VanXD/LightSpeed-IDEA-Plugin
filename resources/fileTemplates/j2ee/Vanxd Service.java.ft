@@ -1,3 +1,0 @@
-package com.vanxd.admin.service.${CONTAINER_NAME};
-public interface  ${NAME}Service  extends BaseService<${NAME}, ${NAME}Mapper> {
-}

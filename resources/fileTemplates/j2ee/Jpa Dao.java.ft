@@ -1,7 +1,0 @@
-package com.vanxd.morethannovel.dao.${CONTAINER_NAME};
-
-import org.springframework.data.repository.PagingAndSortingRepository;
-
-public interface ${NAME}Dao extends PagingAndSortingRepository<${NAME}, Integer> {
-
-}

@@ -3,7 +3,6 @@ package com.vanxd.setting;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import com.vanxd.generator.PackageGenerator;
 import org.jdom.Element;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,12 +25,5 @@ public class LightSpeedSetting implements PersistentStateComponent<Element> {
     @Override
     public void loadState(Element element) {
         PSCP_CMD_FIELD = null == element.getAttributeValue("PSCP_CMD_FIELD") ? "" : element.getAttributeValue("PSCP_CMD_FIELD");
-    }
-
-    private void loadState(Element element, PackageGenerator generator) {
-        String attribute = element.getAttributeValue(generator.getId());
-        if (null != attribute) {
-            generator.setPackageName(attribute);
-        }
     }
 }

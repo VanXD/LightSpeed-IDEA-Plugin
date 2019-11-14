@@ -5,21 +5,15 @@ import com.intellij.ide.fileTemplates.FileTemplateManager;
 import com.intellij.ide.fileTemplates.FileTemplateUtil;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.sun.istack.internal.NotNull;
 import com.vanxd.setting.LightSpeedSetting;
-import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
-import static com.vanxd.generator.ConfigurationHolder.CONTROLLER_PACKAGE_GENERATOR;
-import static com.vanxd.generator.ConfigurationHolder.DAO_PACKAGE_GENERATOR;
-import static com.vanxd.generator.ConfigurationHolder.SERVICE_PACKAGE_GENERATOR;
 
 /**
  * @author wyd on 2016/12/16.
@@ -72,22 +66,6 @@ public class FileUtil {
      * @return
      */
     private static PsiDirectory getTemplateDirectory(String templateName, Project project, PsiFile actionPsiFile) {
-        JavaPsiFacade javaPsiFacade = JavaPsiFacade.getInstance(project);
-        if (templateName.lastIndexOf("Controller") > -1) {
-            String packageName = CONTROLLER_PACKAGE_GENERATOR.getPackageName();
-            if(StringUtils.isNotEmpty(packageName)) {
-                return javaPsiFacade.findPackage(packageName).getDirectories()[0];
-            }
-        }
-        if (templateName.lastIndexOf("ServiceImpl") > -1) {
-            return javaPsiFacade.findPackage(SERVICE_PACKAGE_GENERATOR.getPackageName() + ".impl").getDirectories()[0];
-        }
-        if (templateName.lastIndexOf("ServiceInterface") > -1) {
-            return javaPsiFacade.findPackage(SERVICE_PACKAGE_GENERATOR.getPackageName()).getDirectories()[0];
-        }
-        if (templateName.lastIndexOf("DaoImpl") > -1) {
-            return javaPsiFacade.findPackage(DAO_PACKAGE_GENERATOR.getPackageName() + ".impl").getDirectories()[0];
-        }
         return actionPsiFile.getContainingDirectory();
     }
 }
